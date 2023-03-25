@@ -1,0 +1,33 @@
+.actions {
+  margin: 25px 0px;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+
+  &__add-btn {
+    background: #88b9eb;
+    padding: 8px 10px;
+    border: 0px;
+    font-size: 0.8rem;
+
+    &:hover {
+      background: #98c5f3;
+      cursor: pointer;
+      @include transition-ease;
+    }
+  }
+
+  #{&}__search-bar {
+    position: relative;
+
+    input {
+      padding: 6px 10px;
+    }
+  }
+
+  #{&}__search-icon {
+    position: absolute;
+    right: 5px;
+    top: 7px;
+  }
+}

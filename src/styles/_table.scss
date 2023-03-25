@@ -1,0 +1,40 @@
+.table-container {
+  padding: 0px 20px;
+}
+
+.table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  color: #fff;
+
+  & td {
+    padding: 10px;
+  }
+
+  & thead {
+    background: #2e2f2f;
+  }
+
+  & tbody {
+    & td {
+      font-size: 0.9rem;
+      color: rgb(52, 52, 52);
+      border-bottom: 1px solid grey;
+    }
+  }
+
+  .pen-icon {
+    background: #fecc67;
+    padding: 8px 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .x-icon {
+    @extend .pen-icon;
+    background-color: #f3777b;
+  }
+}

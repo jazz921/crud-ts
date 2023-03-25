@@ -1,0 +1,25 @@
+.navbar {
+  background-color: #7a7980;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+
+  &__user-info {
+    text-align: center;
+  }
+}
+
+.user-info {
+  &__user-name {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  &__user-type {
+    font-size: 0.8rem;
+    color: #c1c1c1;
+  }
+}
