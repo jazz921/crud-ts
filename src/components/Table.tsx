@@ -14,7 +14,7 @@ interface TableComponentProps {
   resultUsers: Users[];
 }
 
-const Table: FC<TableComponentProps> = ({ resultUsers }) => {
+const Table = ({ resultUsers }: TableComponentProps) => {
   const [modal, setModal] = useState<boolean>(false);
   const [selectedUserId, setSelectedUserId] = useState<number>(0);
   const dispatch = useDispatch();

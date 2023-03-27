@@ -19,7 +19,7 @@ interface PropTypes {
   setModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddUserModal: FC<PropTypes> = ({ type, setModal, selectedUserId }) => {
+const AddUserModal = ({ type, setModal, selectedUserId }: PropTypes) => {
   const [formData, setFormData] = useState<Inputs>({
     first_name: "",
     last_name: "",
@@ -67,12 +67,14 @@ const AddUserModal: FC<PropTypes> = ({ type, setModal, selectedUserId }) => {
         if (type === "add_user") {
           dispatch(addUser(formData));
         } else {
-          dispatch(
-            updateUser({
-              id: selectedUserId,
-              formData,
-            })
-          );
+          if (selectedUserId) {
+            dispatch(
+              updateUser({
+                id: selectedUserId,
+                formData,
+              })
+            );
+          }
           if (setModal) {
             setModal(false);
           }

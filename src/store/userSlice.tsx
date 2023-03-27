@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Inputs } from "../components/AddUserModal";
 
 export interface Users {
@@ -34,7 +34,7 @@ const userSlice = createSlice({
       state.users = [...state.users, newUser];
       state.isModalOpen = false;
     },
-    updateUser: (state, action) => {
+    updateUser: (state, action: PayloadAction<{formData: Inputs, id: number}>) => {
       const {
         formData: { email, first_name, last_name },
         id,
