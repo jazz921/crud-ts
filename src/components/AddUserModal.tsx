@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   UserStateType,
   addUser,
+  deleteUser,
   closeModal,
   updateUser,
 } from "../store//userSlice";
@@ -29,6 +30,7 @@ const AddUserModal = ({ type, setModal, selectedUserId }: PropTypes) => {
   const { users } = useSelector((state: { user: UserStateType }) => state.user);
   const dispatch = useDispatch();
 
+  // function for onChange event in the input elements
   const inputHandler = (event: ChangeEvent<HTMLInputElement>): void => {
     let { name, value } = event.target;
     setFormData({
@@ -37,6 +39,7 @@ const AddUserModal = ({ type, setModal, selectedUserId }: PropTypes) => {
     });
   };
 
+  // check if the inputs are not empty
   const isDataNotEmpty = (data: Inputs): boolean => {
     const { first_name, last_name, email } = data;
 
@@ -46,6 +49,7 @@ const AddUserModal = ({ type, setModal, selectedUserId }: PropTypes) => {
     return true;
   };
 
+  // check if the inputted email is valid
   const isEmailValid = (email: string): boolean => {
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       return false;
@@ -53,6 +57,7 @@ const AddUserModal = ({ type, setModal, selectedUserId }: PropTypes) => {
     return true;
   };
 
+  // function for onSubmit event in form
   const submitHandler = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -65,7 +70,12 @@ const AddUserModal = ({ type, setModal, selectedUserId }: PropTypes) => {
         alert("Email must be valid");
       } else {
         if (type === "add_user") {
-          dispatch(addUser(formData));
+          let isEmailAlreadyUsed = users.find(user => user.email === formData.email)
+          if (isEmailAlreadyUsed) {
+            alert("Email already used");
+          } else {
+            dispatch(addUser(formData));
+          }
         } else {
           if (selectedUserId) {
             dispatch(
@@ -99,6 +109,45 @@ const AddUserModal = ({ type, setModal, selectedUserId }: PropTypes) => {
       });
     };
   }, []);
+
+  if (type === "confirm_delete") {
+    return (
+      <section className="backdrop">
+        <div className="modal">
+          <div className="modal__header">
+            <p>CONFIRM USER DELETION</p>
+          </div>
+
+          <div className="modal__inputs">
+            <p className="confirm-msg">Do you want to delete the user?</p>
+          </div>
+
+          <div className="modal__buttons-container">
+            <button
+              type="button"
+              className="cancel-btn"
+              onClick={() => {
+                dispatch(closeModal());
+                if (setModal) {
+                  setModal(false);
+                }
+              }}
+            >
+              CANCEL
+            </button>
+            <button className="submit-btn" onClick={() => {
+              dispatch(deleteUser(selectedUserId))
+              if (setModal) {
+                setModal(false);
+              }
+            }}>
+              SUBMIT
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <form onSubmit={submitHandler}>

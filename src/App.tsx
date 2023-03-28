@@ -52,6 +52,7 @@ function App() {
             placeholder="Search last name"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
+            onBlur={() => setSearchValue("")}
           />
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
