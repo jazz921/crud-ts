@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import Table from "./components/Table";
 import AddUserModal from "./components/AddUserModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { UserStateType, Users, openModal } from "./store/userSlice";
 
@@ -10,6 +10,7 @@ import {
   faMagnifyingGlass,
   faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import ReactGA from "react-ga";
 
 function App() {
   const { isModalOpen, users } = useSelector(
@@ -29,6 +30,10 @@ function App() {
   };
 
   const resultUsers = searchedUsers(searchValue, users); // pass this to Table as props
+
+  useEffect(() => {
+    ReactGA.initialize('G-M3XKW3YHHD')
+  }, [])
 
   return (
     <div className="App">
